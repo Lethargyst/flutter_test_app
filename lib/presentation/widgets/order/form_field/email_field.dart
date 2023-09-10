@@ -22,27 +22,34 @@ class _EmailTextFieldState extends State<EmailTextField> {
   }
 
   void _onInputChange() {
-    context.read<OrderBloc>().add(EmailFieldWroteEvent());
+    context.read<OrderBloc>().add(EmailFieldWroteEvent(content: _controller.text));
   }
 
   @override
   void initState() {
     _focusNode.addListener(_onFocusChange);
     _controller.addListener(_onInputChange);
+    _controller.text = context.read<OrderBloc>().state.email;
     super.initState();
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _focusNode.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocSelector<OrderBloc, OrderState, bool>(
-      selector: (state) => state.isValidEmail ?? true,
+    return BlocBuilder<OrderBloc, OrderState>(
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: state ? AppColors.lightGrey : AppColors.error
+            color: state.isValidEmail ?? true ? AppColors.lightGrey : AppColors.error
           ),
-          child: TextField(
+          child: TextFormField(
             controller: _controller,
             focusNode: _focusNode,
             decoration: InputDecoration(

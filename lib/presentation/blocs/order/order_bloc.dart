@@ -60,6 +60,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   void _onEmailFieldWrote(EmailFieldWroteEvent event, Emitter<OrderState> emit) async {
     emit(state.copyWith(
+      email: event.content,
       isValidEmail: true
     ));
   }
@@ -76,6 +77,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   
   void _onPhoneFieldWrote(PhoneFieldWroteEvent event, Emitter<OrderState> emit) async {
     emit(state.copyWith(
+      phone: event.content,
       isValidPhone: true
     ));
   }

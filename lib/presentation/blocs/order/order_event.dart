@@ -12,7 +12,11 @@ final class EmailFieldValidatedEvent extends OrderEvent {
   final String content;
 }
 
-final class EmailFieldWroteEvent extends OrderEvent {}
+final class EmailFieldWroteEvent extends OrderEvent {
+  EmailFieldWroteEvent({ required this.content });
+
+  final String content;
+}
 
 final class PhoneFieldValidatedEvent extends OrderEvent {
   PhoneFieldValidatedEvent({ required this.content });
@@ -20,7 +24,11 @@ final class PhoneFieldValidatedEvent extends OrderEvent {
   final String content;
 }
 
-final class PhoneFieldWroteEvent extends OrderEvent {}
+final class PhoneFieldWroteEvent extends OrderEvent {
+  PhoneFieldWroteEvent({ required this.content });
+
+  final String content;
+}
 
 final class PrimaryFieldWroteEvent extends OrderEvent {
   PrimaryFieldWroteEvent({ 

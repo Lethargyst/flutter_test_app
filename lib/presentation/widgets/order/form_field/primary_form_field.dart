@@ -56,6 +56,13 @@ class _PrimaryFormFieldState extends State<PrimaryFormField> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _focusNode.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocSelector<OrderBloc, OrderState, FormFieldEntity>(
       selector: (state) {
@@ -67,7 +74,7 @@ class _PrimaryFormFieldState extends State<PrimaryFormField> {
             borderRadius: BorderRadius.circular(10),
             color: state.isValid ? AppColors.lightGrey : AppColors.error
           ),
-          child: TextField(
+          child: TextFormField(
             controller: _controller,
             focusNode: _focusNode,
             decoration: InputDecoration(
